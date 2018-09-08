@@ -38,6 +38,10 @@ function getServedPath(appPackageJson) {
   return ensureSlash(servedUrl, true);
 }
 
+function getPagePath(page) {
+  return resolveApp('src/pages') + '/' + page + '/index';
+}
+
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
@@ -45,6 +49,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/index.js'),
+  appPage: getPagePath,
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),

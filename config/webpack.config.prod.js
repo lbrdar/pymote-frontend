@@ -29,6 +29,11 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+const deafultEntryParts = [
+  // We ship a few polyfills by default:
+  require.resolve('./polyfills'),
+];
+
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
@@ -58,7 +63,9 @@ module.exports = {
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
   entry: {
-    bundle: [require.resolve('./polyfills'), paths.appIndexJs]
+    main: [...deafultEntryParts, paths.appIndexJs],
+    algorithm: [...deafultEntryParts, paths.appPage('algorithm')],
+    results: [...deafultEntryParts, paths.appPage('results')],
   },
   output: {
     // The build folder.
