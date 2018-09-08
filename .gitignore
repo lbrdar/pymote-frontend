@@ -9,7 +9,7 @@
 # production
 /build
 
-webpack-stats-local.json
+webpack-stats.json
 
 
 # misc
